@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // this would be done in an external file
 // for easy access (perhaps a hooks file??)
@@ -8,9 +8,13 @@ export function useCounter(initial = 0, step = 1) {
   const increment = event => setCount(count + step);
   const decrement = event => setCount(count - step);
 
-  console.log(`
-    the count is ${document.querySelector('#count').textContent}
-  `);
+  useEffect(() => {
+    if (count % 2 === 0) {
+      console.log(`
+        the count is even and is ${document.querySelector('#count').textContent}
+      `);
+    }
+  });
 
   return [count, increment, decrement];
 }

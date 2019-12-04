@@ -4,6 +4,7 @@ import { useCounter } from '../hooks';
 // AT A COMPANY STUCK USING AN OLD REACT (16.2)
 // Higher Order Components (wrappers for existing components)
 // Render Props
+// Helpers
 
 export default function Counter({ user }) {
   const [theFunkyCount, increment, decrement] = useCounter(1, 1);

@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 
+// this should be out of here
+export const useLocalStorage = (key, initialValue) => {
+  const [storedValue, setStoredValue] = useState(() => {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+  const setValue = value => {
+    setStoredValue(value);
+    window.localStorage.setItem(key, JSON.stringify(value));
+  };
+  return [storedValue, setValue];
+};
+
 export default function Form({ user }) {
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
+  const [fname, setFname] = useLocalStorage('fname', '');
+  const [lname, setLname] = useLocalStorage('lname', '');
 
   const onFnameChange = evt => {
     setFname(evt.target.value);

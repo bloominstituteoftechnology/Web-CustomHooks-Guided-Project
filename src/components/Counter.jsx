@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // this would be done in an external file
 // for easy access (perhaps a hooks file??)
-export function useCounter(initial = 0, step = 1) {
-  const [count, setCount] = useState(initial);
-
-  const increment = event => setCount(count + step);
-  const decrement = event => setCount(count - step);
-
-  // i don't like this too much
+export function useLogIfCountEven(count) {
   useEffect(() => {
     if (count % 2 === 0) {
       console.log(`
@@ -16,10 +10,18 @@ export function useCounter(initial = 0, step = 1) {
       `);
     }
   });
+}
+
+export function useCounter(initial = 0, step = 1) { // is wrapping useState
+  const [count, setCount] = useState(initial);
+  useLogIfCountEven(count); // this wraps the useEffect
+
+  const increment = event => setCount(count + step);
+  const decrement = event => setCount(count - step);
 
   return [count, increment, decrement];
 }
-// the end
+// the end of hooks
 
 export default function Counter({ user }) {
   const [theFunkyCount, increment, decrement] = useCounter(1, 1);

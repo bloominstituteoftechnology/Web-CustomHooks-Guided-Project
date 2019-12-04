@@ -8,6 +8,7 @@ export function useCounter(initial = 0, step = 1) {
   const increment = event => setCount(count + step);
   const decrement = event => setCount(count - step);
 
+  // i don't like this too much
   useEffect(() => {
     if (count % 2 === 0) {
       console.log(`
